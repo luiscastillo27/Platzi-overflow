@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { MomentModule } from 'ngx-moment';
 //angular material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule, MatListModule } from '@angular/material';
 import 'hammerjs';
 //components
 import { QuestionDetaiilComponent } from './question/question-detaiil/question-detaiil.component';
 import { AnswerFormComponent } from './answer/answer-form/answer-form.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
+import { QuestionListComponent } from './question/question-list/question-list.component';
+import { QuestionFormComponent } from './question/question-form/question-form.component';
 
 
 @NgModule({
@@ -20,11 +22,14 @@ import { RegisterComponent } from './user/register/register.component';
     QuestionDetaiilComponent,
     AnswerFormComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    QuestionListComponent,
+    QuestionFormComponent
   ],
   imports: [
     FormsModule,
     MomentModule,
+    MatListModule,
     BrowserModule,
     MatInputModule,
     MatIconModule,

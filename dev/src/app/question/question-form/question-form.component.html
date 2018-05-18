@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <mat-form-field>
+      <input matInput placeholder="Titulo" name="title" ngModel>
+  </mat-form-field>
+  <mat-form-field>
+      <textarea matInput placeholder="Descripcion" name="descripcion" ngModel></textarea>
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="accent">Crear</button>
+</form>
