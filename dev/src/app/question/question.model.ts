@@ -1,6 +1,7 @@
 import { Answer } from '../answer/answer.model';
 
 export class Question {
+  public id?: string
   public title: string
   public description: string
   public createdAt?: Date
@@ -13,6 +14,7 @@ export class Question {
     createdAt?: Date,
     icon?: string
   ){
+    this.id = "1"
     this.title = title
     this.description = description
     this.createdAt = createdAt
