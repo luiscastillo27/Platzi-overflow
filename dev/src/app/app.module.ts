@@ -11,6 +11,7 @@ import 'hammerjs';
 import { QuestionDetaiilComponent } from './question/question-detaiil/question-detaiil.component';
 import { AnswerFormComponent } from './answer/answer-form/answer-form.component';
 import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { LoginComponent } from './user/login/login.component';
     AppComponent,
     QuestionDetaiilComponent,
     AnswerFormComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     FormsModule,

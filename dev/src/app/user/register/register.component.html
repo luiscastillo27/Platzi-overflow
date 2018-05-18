@@ -1,0 +1,19 @@
+<form [formGroup]="createUserForm">
+  <mat-form-field>
+    <input matInput placeholder="Nombre" formControlName="name" id="name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Apellidos" formControlName="lastname" id="lastname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Correo" formControlName="email" id="email">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" matInput placeholder="Contraseña" formControlName="password" id="password">
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" matInput placeholder="Repetir contraseña" formControlName="password2" id="password2">
+  </mat-form-field>
+  <button (click)="onSubmit()" type="submit" mat-raised-button color="accent">Crear una cuenta</button>
+  <button (click)="onClear()" mat-raised-button color="warn">Cancelar</button>
+</form>

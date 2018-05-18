@@ -32,4 +32,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  onClear(){
+    this.loginForm.reset()
+  }
+
 }
