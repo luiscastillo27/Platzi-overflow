@@ -17,7 +17,19 @@
 
 <div class="answers">
   <h3>Respuestas</h3>
-  <ul class="answers-list">
+  <ul class="answers-list" *ngIf="question.answers.length > 0">
+    <li>
+      <h5>Jim Castillo <small>hace unos segundos</small> </h5>
+      <p class="answers-descripcion">
+        Yo tengo la respuesta
+      </p>
+    </li>
+    <li>
+      <h5>Jim Castillo <small>hace unos segundos</small> </h5>
+      <p class="answers-descripcion">
+        Yo tengo la respuesta
+      </p>
+    </li>
     <li>
       <h5>Jim Castillo <small>hace unos segundos</small> </h5>
       <p class="answers-descripcion">
@@ -38,5 +50,6 @@
     </li>
   </ul>
 
-  <app-answer-form></app-answer-form>
+  <p *ngIf="question.answers.length > 0">Se el primero en responder esta pregunta</p>
+  <app-answer-form class="answers-form"></app-answer-form>
 </div>
