@@ -1,11 +1,11 @@
 export class User {
-  public name: string
-  public lastname: string
 
-  constructor( name: string, lastname: string ){
-    this.name = name
-    this.lastname = lastname
-  }
+  constructor(
+    public email: string,
+    public password: string,
+    public name?: string,
+    public lastname?: string
+  ){}
 
   fullName() {
     return`${this.name} ${this.lastname}`;

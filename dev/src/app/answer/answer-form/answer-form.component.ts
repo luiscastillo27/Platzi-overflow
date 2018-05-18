@@ -23,7 +23,7 @@ export class AnswerFormComponent implements OnInit {
       form.value.descripcion,
       this.question,
       new Date(),
-      new User('Luis', 'Castillo')
+      new User( null, null, 'Luis', 'Castillo')
     )
     this.question.answers.unshift( answer )
     form.reset()

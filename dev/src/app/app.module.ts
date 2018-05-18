@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MomentModule } from 'ngx-moment';
 //angular material
@@ -30,6 +30,7 @@ import { LoginComponent } from './user/login/login.component';
     MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [],
