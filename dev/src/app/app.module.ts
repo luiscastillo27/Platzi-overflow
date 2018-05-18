@@ -10,13 +10,15 @@ import 'hammerjs';
 //components
 import { QuestionDetaiilComponent } from './question/question-detaiil/question-detaiil.component';
 import { AnswerFormComponent } from './answer/answer-form/answer-form.component';
+import { LoginComponent } from './user/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionDetaiilComponent,
-    AnswerFormComponent
+    AnswerFormComponent,
+    LoginComponent
   ],
   imports: [
     FormsModule,
