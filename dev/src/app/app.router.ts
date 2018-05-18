@@ -11,7 +11,7 @@ const app_routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
   { path: 'preguntas', component: QuestionListComponent },
-  { path: 'preguntas/nueva', component: QuestionFormComponent },
+  { path: 'pregunta/nueva', component: QuestionFormComponent },
   { path: 'pregunta/:id', component: QuestionDetaiilComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];

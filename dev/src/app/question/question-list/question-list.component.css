@@ -7,3 +7,10 @@ i{
   font-size: 35px !important;
   margin-top: 0px !important;
 }
+
+button{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 27px;
+}
