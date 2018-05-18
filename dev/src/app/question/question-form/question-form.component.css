@@ -4,4 +4,9 @@ i{
 
 small{
   display: block;
+  font-size: 10px;
+}
+
+.material-icons{
+  font-size: 39px;
 }

@@ -15,6 +15,8 @@ import { RegisterComponent } from './user/register/register.component';
 import { QuestionListComponent } from './question/question-list/question-list.component';
 import { QuestionFormComponent } from './question/question-form/question-form.component';
 
+//RouterModule
+import { app_routing } from './app.router';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { QuestionFormComponent } from './question/question-form/question-form.co
   ],
   imports: [
     FormsModule,
+    app_routing,
     MatGridListModule,
     MatRadioModule,
     MomentModule,

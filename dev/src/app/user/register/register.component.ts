@@ -45,8 +45,4 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onClear(){
-    this.createUserForm.reset()
-  }
-
 }
