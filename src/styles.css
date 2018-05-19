@@ -24,3 +24,7 @@ form {
 [ng-reflect-router-link]:focus {
   outline: 0!important;
 }
+
+.loading{
+  margin: 27px 0px 0px 27px;
+}

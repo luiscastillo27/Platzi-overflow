@@ -6,7 +6,7 @@ import { MomentModule } from 'ngx-moment';
 import { HttpModule } from '@angular/http';
 //angular material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule, MatListModule, MatGridListModule, MatRadioModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule, MatListModule, MatGridListModule, MatRadioModule, MatProgressSpinnerModule } from '@angular/material';
 import 'hammerjs';
 //components
 import { QuestionDetaiilComponent } from './question/question-detaiil/question-detaiil.component';
@@ -36,6 +36,7 @@ import { app_routing } from './app.router';
     app_routing,
     MatGridListModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
     MomentModule,
     MatListModule,
     BrowserModule,

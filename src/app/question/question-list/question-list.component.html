@@ -1,4 +1,5 @@
-<mat-list>
+<mat-spinner *ngIf="loading" mode="indeterminate" class="loading"></mat-spinner>
+<mat-list *ngIf="!loading">
   <mat-list-item *ngFor="let question of questions" [routerLink]="[ '/pregunta', question.id ]">
     <i *ngIf="question.icon === 'none'" mat-list-icon class="material-icons help">help</i>
     <i *ngIf="question.icon !== 'none'" mat-list-icon class="{{ question.icon }}"></i>

@@ -20,7 +20,9 @@ const question = {
 const questions = new Array(10).fill(question)
 
 app.get('/', (req, res) => {
-  res.status(200).json(questions)
+  setTimeout( () => {
+    res.status(200).json(questions)
+  }, 2000)
 })
 
 app.get('/:id', (req, res) => {

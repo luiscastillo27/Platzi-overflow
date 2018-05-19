@@ -11,11 +11,15 @@ import { Question } from '../question.model';
 export class QuestionListComponent implements OnInit {
 
   questions: Question[]
-  constructor( private _qs:QustionsService ) { }
+  loading:boolean
+  constructor( private _qs:QustionsService ) {
+    this.loading = true
+  }
 
   ngOnInit() {
     this._qs.getQuestions().then( ( resp:Question[] ) => {
       this.questions = resp
+      this.loading = false
     })
   }
 
