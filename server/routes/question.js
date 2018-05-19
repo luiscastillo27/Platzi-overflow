@@ -4,14 +4,15 @@ const app = express.Router()
 
 const question = {
   id: 1,
-  title: 'Como utilizao un componente en Android',
-  descripcion: 'Mien esta pregunta',
+  title: '¿Cómo reutilizo un componente en Android?',
+  description: 'Miren esta es mi pregunta...',
   createdAt: new Date(),
   icon: 'devicon-android-plain',
+  answers: [],
   user: {
     name: 'Luis',
     lastname: 'Castillo',
-    email: 'luisyosemite@gmail.com',
+    email: 'luiscastillo@iwebsapp.com',
     password: 'jimyluis'
   }
 }

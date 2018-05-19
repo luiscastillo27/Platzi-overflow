@@ -13,7 +13,7 @@ const app_routes: Routes = [
   { path: 'preguntas', component: QuestionListComponent },
   { path: 'pregunta/nueva', component: QuestionFormComponent },
   { path: 'pregunta/:id', component: QuestionDetaiilComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'login' }
+  { path: '**', pathMatch: 'full', redirectTo: 'preguntas' }
 ];
 
 export const app_routing = RouterModule.forRoot(app_routes);

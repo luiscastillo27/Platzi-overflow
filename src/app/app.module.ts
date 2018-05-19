@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MomentModule } from 'ngx-moment';
+import { HttpModule } from '@angular/http';
 //angular material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule, MatListModule, MatGridListModule, MatRadioModule } from '@angular/material';
@@ -18,6 +19,7 @@ import { QuestionFormComponent } from './question/question-form/question-form.co
 //RouterModule
 import { app_routing } from './app.router';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,7 @@ import { app_routing } from './app.router';
   ],
   imports: [
     FormsModule,
+    HttpModule,
     app_routing,
     MatGridListModule,
     MatRadioModule,

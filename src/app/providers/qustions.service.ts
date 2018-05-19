@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core'
 import { environment } from '../../environments/environment'
-import { urljoin } from 'url-join'
 import { Question } from '../question/question.model'
 import { Http } from '@angular/http'
-import 'rxjs/add/operator/toPromise'
+import * as urljoin from 'url-join';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class QustionsService {
 
   private questionsUrl: string
@@ -16,21 +14,24 @@ export class QustionsService {
   }
 
   getQuestions(): Promise<void | Question[]> {
-    return this._http.get(this.questionsUrl).toPromise().then( data => {
-      data.json() as Question[]
-    }).catch( this.handleError )
+    return this._http.get(this.questionsUrl)
+              .toPromise()
+              .then(response => response.json() as Question[])
+              .catch(this.handleError);
   }
 
-  getQuestion( id:Number ): Promise<void | Question> {
-    const url = urljoin(environment.apiUrl, id)
-    return this._http.get(url).toPromise().then( data => {
-      data.json() as Question
-    }).catch( this.handleError )
+  getQuestion(id): Promise<void | Question> {
+    const url = urljoin(this.questionsUrl, id);
+    return this._http.get(url)
+            .toPromise()
+            .then(response => response.json() as Question)
+            .catch(this.handleError);
   }
 
-  handleError( error: any ){
-    const errorMessage = error.message ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error'
-    console.log(errorMessage)
+  handleError(error: any) {
+    const errMsg = error.message ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.log(errMsg);
   }
 
 }

@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { QustionsService } from '../../providers/qustions.service';
 import { Question } from '../question.model';
 
-const q = new Question(
-  'Pregunta 1',
-  'Miren, esta es mi duda',
-  new Date(),
-  'none'
-)
 @Component({
   selector: 'app-question-list',
   templateUrl: './question-list.component.html',
-  styleUrls: ['./question-list.component.css']
+  styleUrls: ['./question-list.component.css'],
+  providers: [QustionsService]
 })
 export class QuestionListComponent implements OnInit {
 
-  questions: Question[] = new Array(10).fill(q)
-  constructor() { }
+  questions: Question[]
+  constructor( private _qs:QustionsService ) { }
 
   ngOnInit() {
+    this._qs.getQuestions().then( ( resp:Question[] ) => {
+      this.questions = resp
+    })
   }
 
 }
