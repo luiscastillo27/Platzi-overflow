@@ -26,7 +26,26 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:id', (req, res) => {
-  res.status(200).json(question)
+  setTimeout( () => {
+    const id = req.params.id
+    const q = questions.find( question => question.id === +id)
+    res.status(200).json(question)
+  }, 2000)
+})
+
+app.post('/', (req, res) => {
+  const newQuestion = req.body
+  newQuestion.id = +new Date()
+  newQuestion.user = {
+    name: 'Luis',
+    lastname: 'Castillo',
+    email: 'luiscastillo@iwebsapp.com',
+    password: 'jimyluis'
+  }
+  newQuestion.createdAt = new Date()
+  newQuestion.answers = []
+  questions.unshift(newQuestion)
+  res.status(201).json(question)
 })
 
 export default app
