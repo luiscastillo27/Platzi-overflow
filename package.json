@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "DEBUG=PlatziOverflow* babel-node server/index.js",
+    "start:server": "DEBUG=PlatziOverflow* nodemon server/index.js --exec babel-node",
     "start:client": "ng serve"
   },
   "private": true,
