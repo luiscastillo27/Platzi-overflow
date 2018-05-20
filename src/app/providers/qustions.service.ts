@@ -26,7 +26,7 @@ export class QustionsService {
   }
 
   getQuestion(id): Promise<void | Question> {
-    const url = urljoin(this.questionsUrl, id);
+    const url = urljoin(this.questionsUrl, id)
     return this._http.get(url)
             .toPromise()
             .then(response => response.json() as Question)
@@ -34,13 +34,13 @@ export class QustionsService {
   }
 
   addQuestion( question:Question ){
-    const body = JSON.stringify(question);
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers, method: 'POST'});
+    const body = JSON.stringify(question)
+    const headers = new Headers({ 'Content-Type': 'application/json' })
+    const options = new RequestOptions({ headers: headers, method: 'POST'})
 
     return this._http.post(this.questionsUrl, body, options)
       .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json()));
+      .catch((error: Response) => Observable.throw(error.json()))
   }
 
   addAnswer( answer:Answer ){
@@ -51,18 +51,18 @@ export class QustionsService {
       }
     }
     const body = JSON.stringify(ans);
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const idString = answer.question.id.toString();
-    const url = urljoin(this.questionsUrl, idString, 'respuestas');
+    const headers = new Headers({ 'Content-Type': 'application/json' })
+    const idString = answer.question.id.toString()
+    const url = urljoin(this.questionsUrl, idString, 'respuestas')
     return this._http.post(url, body, { headers })
       .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json()));
+      .catch((error: Response) => Observable.throw(error.json()))
   }
 
   handleError(error: any) {
     const errMsg = error.message ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.log(errMsg);
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error'
+    console.log(errMsg)
   }
 
 }
