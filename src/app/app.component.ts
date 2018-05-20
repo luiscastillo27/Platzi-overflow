@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './providers/auth.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -10,18 +11,19 @@ import { AuthService } from './providers/auth.service';
 export class AppComponent {
   title = 'app';
 
-  constructor( private _auth:AuthService ){}
+  constructor( private _auth:AuthService, private router: Router ){}
 
   isLoggedIn(){
     return this._auth.isLoggedIn()
   }
 
   fullName(){
-    return this._auth.currentUser.fullName()
+    return this._auth.fullName()
   }
 
   signOut(){
-    this._auth.logout();
+    this._auth.logout()
+    this.router.navigateByUrl('/')
   }
 
 }

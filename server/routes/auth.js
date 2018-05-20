@@ -8,11 +8,11 @@ const debug = new Debug('platzi-overflow:auth')
 const secret = 'miclavesjim'
 
 const users = [{
-    name: 'luis',
-    lastname: 'castillo',
+    name: 'Luis',
+    lastname: 'Castillo',
     email: 'luis@gmail.com',
     password: 'jimyluis',
-    id: 123
+    id: 127
 }]
 
 const findUserByEmail = e => users.find(({ email }) => email === e)
