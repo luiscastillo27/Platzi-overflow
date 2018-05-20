@@ -34,17 +34,17 @@ app.get('/:id', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  const newQuestion = req.body
-  newQuestion.id = +new Date()
-  newQuestion.user = {
+  const question = req.body
+  question.id = +new Date()
+  question.user = {
+    email: 'luis@gmail.com',
+    password: 'jimyluis',
     name: 'Luis',
-    lastname: 'Castillo',
-    email: 'luiscastillo@iwebsapp.com',
-    password: 'jimyluis'
+    lastname: 'Castillo'
   }
-  newQuestion.createdAt = new Date()
-  newQuestion.answers = []
-  questions.unshift(newQuestion)
+  question.createdAt = new Date()
+  question.answers = []
+  questions.push(question)
   res.status(201).json(question)
 })
 
