@@ -2,6 +2,24 @@ import express from 'express'
 
 const app = express.Router()
 
+const currentUser = {
+  name: 'Luis',
+  lastname: 'Castillo',
+  email: 'luiscastillo@iwebsapp.com',
+  password: 'jimyluis'
+}
+
+function questionMeddleware(req,resp,next){
+  const id = req.params.id
+  req.question =  questions.find( question => question.id === +id)
+  next()
+}
+
+function userMeddleware(req,resp,next){
+  req.user = currentUser
+  next()
+}
+
 const question = {
   id: 1,
   title: '¿Cómo reutilizo un componente en Android?',
@@ -25,23 +43,16 @@ app.get('/', (req, res) => {
   }, 2000)
 })
 
-app.get('/:id', (req, res) => {
+app.get('/:id', questionMeddleware, (req, res) => {
   setTimeout( () => {
-    const id = req.params.id
-    const q = questions.find( question => question.id === +id)
-    res.status(200).json(question)
+    res.status(200).json(req.question)
   }, 2000)
 })
 
-app.post('/', (req, res) => {
+app.post('/', userMeddleware, (req, res) => {
   const question = req.body
   question.id = +new Date()
-  question.user = {
-    email: 'luis@gmail.com',
-    password: 'jimyluis',
-    name: 'Luis',
-    lastname: 'Castillo'
-  }
+  question.user = req.user
   question.createdAt = new Date()
   question.answers = []
   questions.push(question)
