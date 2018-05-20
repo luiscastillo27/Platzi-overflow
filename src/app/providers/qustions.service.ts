@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core'
 import { environment } from '../../environments/environment'
-import { Question } from '../question/question.model'
 import { Http, Headers, Response, RequestOptions, Request, RequestMethod } from '@angular/http';
 import * as urljoin from 'url-join';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { map } from 'rxjs/operators';
+import { Question } from '../question/question.model'
+import { Answer } from '../answer/answer.model';
 
 @Injectable()
 
@@ -38,6 +39,22 @@ export class QustionsService {
     const options = new RequestOptions({ headers: headers, method: 'POST'});
 
     return this._http.post(this.questionsUrl, body, options)
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw(error.json()));
+  }
+
+  addAnswer( answer:Answer ){
+    const ans = {
+      description: answer.descripcion,
+      question: {
+        id: answer.question.id
+      }
+    }
+    const body = JSON.stringify(ans);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const idString = answer.question.id.toString();
+    const url = urljoin(this.questionsUrl, idString, 'respuestas');
+    return this._http.post(url, body, { headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => Observable.throw(error.json()));
   }

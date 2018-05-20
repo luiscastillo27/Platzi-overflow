@@ -9,13 +9,13 @@ const currentUser = {
   password: 'jimyluis'
 }
 
-function questionMeddleware(req,resp,next){
-  const id = req.params.id
-  req.question =  questions.find( question => question.id === +id)
+function questionMiddleware(req, res, next) {
+  const { id } = req.params
+  req.question = questions.find(({ id }) => id === +id)
   next()
 }
 
-function userMeddleware(req,resp,next){
+function userMiddleware(req, res, next) {
   req.user = currentUser
   next()
 }
@@ -43,13 +43,13 @@ app.get('/', (req, res) => {
   }, 2000)
 })
 
-app.get('/:id', questionMeddleware, (req, res) => {
+app.get('/:id', questionMiddleware, (req, res) => {
   setTimeout( () => {
     res.status(200).json(req.question)
   }, 2000)
 })
 
-app.post('/', userMeddleware, (req, res) => {
+app.post('/', userMiddleware, (req, res) => {
   const question = req.body
   question.id = +new Date()
   question.user = req.user
@@ -57,6 +57,15 @@ app.post('/', userMeddleware, (req, res) => {
   question.answers = []
   questions.push(question)
   res.status(201).json(question)
+})
+
+app.post('/:id/respuestas', questionMiddleware, userMiddleware, (req, res) => {
+  const answer = req.body
+  const q = req.question
+  answer.createdAt = new Date()
+  answer.user = req.user
+  q.answers.push(answer)
+  res.status(201).json(answer)
 })
 
 export default app
