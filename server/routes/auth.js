@@ -3,44 +3,39 @@ import Debug from 'debug'
 import jwt from 'jsonwebtoken'
 
 const app = express.Router()
-const debug = new Debug('PlatziOverflow:root')
+const debug = new Debug('platzi-overflow:auth')
+
 const secret = 'miclavesjim'
-const users = {
-  id: 2715,
-  name: 'Luis',
-  lastname: 'Castillo',
-  email: 'luiscastillo@iwebsapp.com',
-  password: 'jimyluis'
+
+const users = [{
+    name: 'luis',
+    lastname: 'castillo',
+    email: 'luis@gmail.com',
+    password: 'jimyluis',
+    id: 123
+}]
+
+const findUserByEmail = e => users.find(({ email }) => email === e)
+
+function comparePasswords(providedPassword, userPassword) {
+  return providedPassword === userPassword
 }
 
-function findUserByEmail( email ){
-  return users.find(user => user.email == email)
-}
-
-function comparePasswords(providedPassword, userPassword){
-  return  providedPassword === userPassword
-}
-
-function handelLoginFailed( res ){
-  return res.status(401).json({
-    message: 'Login failed',
-    error: 'Email and password dont match'
-  })
-}
-
-app.post('/login', (req, res, next) => {
+app.post('/signin', (req, res, next) => {
   const { email, password } = req.body
-  const user = findUserByEmail( email )
-  if(!user){
+  const user = findUserByEmail(email)
+
+  if (!user) {
     debug(`User with email ${email} not found`)
-    return handelLoginFailed(res)
-  }
-  if (!comparePasswords(password, user.password)){
-      debug(`Password do not match: ${password} !== ${user.password}`)
-      return handelLoginFailed(res)
+    return handleLoginFailed(res)
   }
 
-  const token = jwt.sign({user}, secret, { expiresIn: 86400 })
+  if (!comparePasswords(password, user.password)) {
+    debug(`Passwords do not match: ${password} !== ${user.password}`)
+    return handleLoginFailed(res, 'El correo y la contraseña no coinciden')
+  }
+
+  const token = createToken(user)
   res.status(200).json({
     message: 'Login succeded',
     token,
@@ -50,5 +45,36 @@ app.post('/login', (req, res, next) => {
     email: user.email
   })
 })
+
+const createToken = (user) => jwt.sign({ user }, secret, { expiresIn: 86400 })
+
+app.post('/signup', (req, res) => {
+  const { name, lastname, email, password } = req.body
+  const user = {
+    id: +new Date(),
+    name,
+    lastname,
+    email,
+    password
+  }
+  debug(`Creating new user: ${user}`)
+  users.push(user)
+  const token = createToken(user)
+  res.status(201).json({
+    message: 'User saved',
+    token,
+    userId: user.id,
+    name,
+    lastname,
+    email
+  })
+})
+
+function handleLoginFailed(res, message) {
+  return res.status(401).json({
+    message: 'Login failed',
+    error: message || 'Email and password don\'t match'
+  })
+}
 
 export default app

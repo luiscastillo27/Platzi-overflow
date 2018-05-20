@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment'
 import { Http, Headers, Response, RequestOptions, Request, RequestMethod } from '@angular/http';
 import * as urljoin from 'url-join';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -12,38 +13,47 @@ import 'rxjs/add/operator/catch';
 })
 export class AuthService {
 
-  private usersUrl: string
-  private currentUser?: User
+  usersUrl: string;
+  currentUser?: User;
 
-  constructor( private _http:Http ) {
-    this.usersUrl = urljoin( environment.apiUrl, 'auth' )
-    if ( this.isLoggedIn() ){
-      const { userId, email, name, lastname } = JSON.parse( localStorage.getItem('user'))
-      this.currentUser = new User(email, null, name, lastname, userId )
+  constructor(private http: Http, private router: Router) {
+    this.usersUrl = urljoin(environment.apiUrl, 'auth');
+    if (this.isLoggedIn()) {
+      const { userId, email, firstName, lastName } = JSON.parse(localStorage.getItem('user'));
+      this.currentUser = new User(email, null, firstName, lastName, userId);
     }
   }
 
-  signIn( user:User ){
-    const body = JSON.stringify(user)
-    const headers = new Headers({ 'Content-Type': 'application/json' })
-    return this._http.post(urljoin(this.usersUrl, 'login'), body, { headers } )
-    .map((resp:Response) => {
-      const json = resp.json()
-      this.login(json)
-      return json
-    }).catch( (error:Response) => {
-      return Observable.throw( error.json() )
-    })
+  signin(user: User) {
+    const body = JSON.stringify(user);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post(urljoin(this.usersUrl, 'signin'), body, { headers })
+      .map((response: Response) => {
+        const json = response.json();
+        this.login(json);
+        return json;
+      })
+      .catch((error: Response) => {
+        console.log(error);
+        return Observable.throw(error.json());
+      });
   }
 
-  login = ({ token, userId, name, lastname, email}) => {
-    this.currentUser = new User(email, null, name, lastname, userId )
-    localStorage.setItem('token', token)
-    localStorage.setItem('user', JSON.stringify(this.currentUser))
+  login = ({ token, userId, firstName, lastName, email }) => {
+    this.currentUser = new User(email, null, firstName, lastName, userId);
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify({ userId, firstName, lastName, email }));
+    this.router.navigateByUrl('/');
   }
 
-  isLoggedIn(){
-    return localStorage.getItem('token') !== null
+  isLoggedIn() {
+    return localStorage.getItem('token') !== null;
+  }
+
+  logout() {
+    localStorage.clear();
+    this.currentUser = null;
+    this.router.navigateByUrl('/');
   }
 
 }
