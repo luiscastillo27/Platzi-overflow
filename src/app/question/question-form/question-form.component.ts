@@ -32,7 +32,9 @@ export class QuestionFormComponent {
   onSubmit( form: NgForm ){
     const q = new Question(
       form.value.title,
-      form.value.descripcion
+      form.value.descripcion,
+      new Date(),
+      form.value.icon
     )
     this._qs.addQuestion(q).subscribe( ({ id }) => this._router.navigate(['/pregunta', id]),
       error => console.log( error )

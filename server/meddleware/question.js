@@ -13,7 +13,7 @@ const question = {
   }
 }
 
-const questions = new Array(10).fill(question)
+const questions = new Array(1).fill(question)
 
 export const questionsMiddleware = (req, res, next) => {
   req.questions = questions

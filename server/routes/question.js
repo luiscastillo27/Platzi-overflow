@@ -20,13 +20,12 @@ app.get('/:id', questionMiddleware, (req, res) => {
 })
 
 app.post('/', required, questionsMiddleware, (req, res) => {
-  const question = req.body
-  question.id = +new Date()
-  question.user = req.user
-  question.createdAt = new Date()
-  question.answers = []
-  req.questions.push(question)
-  res.status(201).json(question)
+  const q = req.body
+  q.id = +new Date()
+  q.createdAt = new Date()
+  q.answers = []
+  req.questions.push(q)
+  res.status(201).json(q)
 })
 
 app.post('/:id/respuestas', required, questionMiddleware, (req, res) => {
