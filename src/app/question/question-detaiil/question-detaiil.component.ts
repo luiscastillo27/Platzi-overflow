@@ -24,11 +24,15 @@ export class QuestionDetaiilComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.sub = this._ar.params.subscribe( nav =>{
+      
       this._qs.getQuestion( nav.id ).then( (resp:Question) =>{
+        console.log( resp )
         this.question = resp
         this.loading = false
       })
+
     })
   }
 
